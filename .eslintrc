@@ -1,4 +1,13 @@
 {
   "root": true,
-  "extends": "@upstatement/eslint-config/react"
+  "extends": "@upstatement/eslint-config/react",
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "no-unused-vars": ["error", { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }]
+  }
 }
+

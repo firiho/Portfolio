@@ -82,7 +82,7 @@ const StyledPic = styled.div`
       position: relative;
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1);
+      filter: grayscale(1%) contrast(1) brightness(90%);
       transition: var(--transition);
     }
 
@@ -125,7 +125,7 @@ const About = () => {
     sr.reveal(revealContainer.current, srConfig());
   }, []);
 
-  const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
+  // const skills = ['JavaScript (ES6+)', 'TypeScript', 'React', 'Eleventy', 'Node.js', 'WordPress'];
 
   return (
     <StyledAboutSection id="about" ref={revealContainer}>
@@ -135,11 +135,15 @@ const About = () => {
         <StyledText>
           <div>
             <p>
+              Hello, Flambeau here! Thank you for visiting! I am still building this portfolio every
+              day (during my internship), check again tomorrow (literally)
+            </p>
+            {/* <p>
               Hello! My name is Brittany and I enjoy creating things that live on the internet. My
               interest in web development started back in 2012 when I decided to try editing custom
               Tumblr themes — turns out hacking together a custom reblog button taught me a lot
               about HTML &amp; CSS!
-            </p>
+            </p> 
 
             <p>
               Fast-forward to today, and I’ve had the privilege of working at{' '}
@@ -166,7 +170,8 @@ const About = () => {
 
           <ul className="skills-list">
             {skills && skills.map((skill, i) => <li key={i}>{skill}</li>)}
-          </ul>
+          </ul>*/}
+          </div>
         </StyledText>
 
         <StyledPic>

@@ -2,12 +2,12 @@ const config = require('./src/config');
 
 module.exports = {
   siteMetadata: {
-    title: 'Brittany Chiang',
+    title: 'Flambeau Iriho',
     description:
-      'Brittany Chiang is a software engineer who specializes in building (and occasionally designing) exceptional digital experiences.',
-    siteUrl: 'https://brittanychiang.com', // No trailing slash allowed!
+      'Flambeau Iriho is an aspiring software engineer and a junior at Minerva University. He is passionate about building software that solves real-world problems and has a positive impact on society.',
+    siteUrl: 'https://irihoflambeau.netlify.app', // No trailing slash allowed!
     image: '/og.png', // Path to your image you placed in the 'static' folder
-    twitterUsername: '@bchiang7',
+    twitterUsername: '@irihoflambeau',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
