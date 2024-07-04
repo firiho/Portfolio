@@ -80,6 +80,7 @@ module.exports = {
               //tracedSVG: { color: config.colors.green },
             },
           },
+          `gatsby-remark-code-titles`,
           {
             // https://www.gatsbyjs.org/packages/gatsby-remark-code-titles/
             resolve: 'gatsby-remark-code-titles',
