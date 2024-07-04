@@ -1,0 +1,26 @@
+[build]
+  # Command to clear cache and build your Gatsby site
+  command = "gatsby clean && gatsby build"
+  # Directory where the built files are stored
+  publish = "public"
+
+[context.production.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "development"
+
+[context.branch-deploy.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "development"
+
+[context.next.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "development"
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
