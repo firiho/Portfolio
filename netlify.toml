@@ -1,6 +1,24 @@
 [build]
-  command = "npm run build"
-  publish = "build"
+  command = "gatsby build"
+  publish = "public"
 
 [context.production.environment]
-  NODE_VERSION = "21.7.3"
+  NODE_VERSION = "21"
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "development"
+
+[context.branch-deploy.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "development"
+
+[context.next.environment]
+  NODE_VERSION = "21"
+  NODE_ENV = "development"
+
+[[redirects]]
+  from = "/*"
+  to = "/"
+  status = 200
