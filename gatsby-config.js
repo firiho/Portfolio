@@ -62,6 +62,7 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
+          `gatsby-remark-code-titles`,
           {
             // https://www.gatsbyjs.org/packages/gatsby-remark-external-links
             resolve: 'gatsby-remark-external-links',
@@ -80,7 +81,6 @@ module.exports = {
               //tracedSVG: { color: config.colors.green },
             },
           },
-          `gatsby-remark-code-titles`,
           {
             // https://www.gatsbyjs.org/packages/gatsby-remark-code-titles/
             resolve: 'gatsby-remark-code-titles',
