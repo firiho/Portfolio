@@ -1,6 +1,6 @@
 [build]
   # Command to clear cache and build your Gatsby site
-  command = "gatsby clean && gatsby build"
+  command = "gatsby clean && gatsby build --verbose"
   # Directory where the built files are stored
   publish = "public"
 
