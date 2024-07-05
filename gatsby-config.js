@@ -6,8 +6,8 @@ module.exports = {
     description:
       'Flambeau Iriho is an aspiring software engineer and a junior at Minerva University. He is passionate about building software that solves real-world problems and has a positive impact on society.',
     siteUrl: 'https://irihoflambeau.netlify.app', // No trailing slash allowed!
-    image: '/og.png', // Path to your image you placed in the 'static' folder
-    twitterUsername: '@irihoflambeau',
+    image: 'og.png', // Path to your image you placed in the 'static' folder
+    twitterUsername: '',
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -20,8 +20,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'Brittany Chiang',
-        short_name: 'Brittany Chiang',
+        name: 'Flambeau Iriho',
+        short_name: 'Flambeau Iriho',
         start_url: '/',
         background_color: config.colors.darkNavy,
         theme_color: config.colors.navy,
