@@ -1,9 +1,9 @@
 ---
 date: '3'
 title: 'Computer Science Teaching Assistant'
-company: 'Agahozo Shalom Youth Village'
+company: 'CMU CS Academy'
 location: 'Rwamagana, Rwanda'
-range: 'Jan 2020 - September 2021'
+range: 'Jan 2020 - Sep 2021'
 url: 'https://academy.cs.cmu.edu/'
 ---
 

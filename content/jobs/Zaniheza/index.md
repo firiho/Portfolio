@@ -3,7 +3,7 @@ date: '1'
 title: 'Web Developer'
 company: 'Zaniheza'
 location: 'Kigali, Rwanda'
-range: 'July 2020'
+range: 'Jul 2020'
 url: 'https://zaniheza.com/'
 ---
 
