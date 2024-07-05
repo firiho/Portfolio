@@ -9,14 +9,11 @@ import { usePrefersReducedMotion } from '@hooks';
 
 const StyledJobsSection = styled.section`
   max-width: 700px;
-
   .inner {
     display: flex;
-
     @media (max-width: 600px) {
       display: block;
     }
-
     // Prevent container from jumping
     @media (min-width: 700px) {
       min-height: 340px;
@@ -31,7 +28,6 @@ const StyledTabList = styled.div`
   padding: 0;
   margin: 0;
   list-style: none;
-
   @media (max-width: 600px) {
     display: flex;
     overflow-x: auto;
@@ -45,7 +41,6 @@ const StyledTabList = styled.div`
     padding-left: 25px;
     margin-left: -25px;
   }
-
   li {
     &:first-of-type {
       @media (max-width: 600px) {
@@ -71,7 +66,7 @@ const StyledTabButton = styled.button`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: var(--tab-height);
+  height: var(--tab-height);
   padding: 0 20px 2px;
   border-left: 2px solid var(--lightest-navy);
   background-color: transparent;
@@ -80,10 +75,10 @@ const StyledTabButton = styled.button`
   font-size: var(--fz-xs);
   text-align: left;
   white-space: nowrap;
-
+  /* Add word-wrap property for smaller screens */
   @media (max-width: 768px) {
     padding: 0 15px 2px;
-    white-space: normal;
+    white-space: normal; /* This will break the text into multiple lines if necessary */
   }
   @media (max-width: 600px) {
     ${({ theme }) => theme.mixins.flexCenter};
@@ -93,7 +88,6 @@ const StyledTabButton = styled.button`
     border-bottom: 2px solid var(--lightest-navy);
     text-align: center;
   }
-
   &:hover,
   &:focus {
     background-color: var(--light-navy);
@@ -112,7 +106,6 @@ const StyledHighlight = styled.div`
   transform: translateY(calc(${({ activeTabId }) => activeTabId} * var(--tab-height)));
   transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
   transition-delay: 0.1s;
-
   @media (max-width: 600px) {
     top: auto;
     bottom: 0;
@@ -131,7 +124,6 @@ const StyledTabPanels = styled.div`
   position: relative;
   width: 100%;
   margin-left: 20px;
-
   @media (max-width: 600px) {
     margin-left: 0;
   }
@@ -141,22 +133,18 @@ const StyledTabPanel = styled.div`
   width: 100%;
   height: auto;
   padding: 10px 5px;
-
   ul {
     ${({ theme }) => theme.mixins.fancyList};
   }
-
   h3 {
     margin-bottom: 2px;
     font-size: var(--fz-xxl);
     font-weight: 500;
     line-height: 1.3;
-
     .company {
       color: var(--green);
     }
   }
-
   .range {
     margin-bottom: 25px;
     color: var(--light-slate);
@@ -169,7 +157,7 @@ const Jobs = () => {
   const data = useStaticQuery(graphql`
     query {
       jobs: allMarkdownRemark(
-        filter: { fileAbsolutePath: { regex: "/content/jobs/" } }
+        filter: { fileAbsolutePath: { regex: "/content/education/" } }
         sort: { fields: [frontmatter___date], order: DESC }
       ) {
         edges {
@@ -244,8 +232,8 @@ const Jobs = () => {
   };
 
   return (
-    <StyledJobsSection id="jobs" ref={revealContainer}>
-      <h2 className="numbered-heading">Where I’ve Worked</h2>
+    <StyledJobsSection id="education" ref={revealContainer}>
+      <h2 className="numbered-heading">Education</h2>
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
