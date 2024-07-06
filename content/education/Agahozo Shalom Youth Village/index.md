@@ -1,6 +1,6 @@
 ---
 date: '2021'
-title: 'Computere Science and AI Student'
+title: 'Mathematics, Physics, and Computer Science'
 company: 'Liquidnet Family High School @ ASYV'
 location: 'Rwamagana, Rwanda'
 range: 'Jan 2017 - Aug 2021'
