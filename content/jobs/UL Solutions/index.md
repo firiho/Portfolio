@@ -3,7 +3,7 @@ date: '6'
 title: 'Test Engineer Intern'
 company: 'UL Solutions'
 location: 'Fremont, CA'
-range: 'May - Jul 2023 & May - Present'
+range: 'May - Jul 2023 & 2024'
 url: 'https://www.ul.com/'
 ---
 

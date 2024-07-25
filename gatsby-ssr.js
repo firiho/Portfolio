@@ -23,5 +23,21 @@ export const onRenderBody = ({ setHeadComponents }) => {
     <link key="mask-icon" rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />,
     <meta key="msapplication-TileColor" name="msapplication-TileColor" content="#da532c" />,
     <meta key="theme-color" name="theme-color" content="#ffffff" />,
+    <script
+      key="gtag"
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-KBJ3HD59L2"
+    />,
+    <script
+      key="gtag-init"
+      dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-KBJ3HD59L2');
+        `,
+      }}
+    />,
   ]);
 };

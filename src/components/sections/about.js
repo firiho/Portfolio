@@ -130,6 +130,7 @@ const About = () => {
     'JavaScript',
     'SQL',
     'React',
+    'Gatsby',
     'Flask',
     'TensorFlow',
     'NumPy',

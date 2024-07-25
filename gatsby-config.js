@@ -5,7 +5,7 @@ module.exports = {
     title: 'Flambeau Iriho',
     description:
       'Flambeau Iriho is an aspiring software engineer and a junior at Minerva University. He is passionate about building software that solves real-world problems and has a positive impact on society.',
-    siteUrl: 'https://irihoflambeau.netlify.app', // No trailing slash allowed!
+    siteUrl: 'https://irihoflambeau.com', // No trailing slash allowed!
     image: 'og.png', // Path to your image you placed in the 'static' folder
     twitterUsername: '',
   },
@@ -153,7 +153,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
-        trackingId: 'UA-45666519-2',
+        trackingId: 'G-KBJ3HD59L2',
       },
     },
   ],
