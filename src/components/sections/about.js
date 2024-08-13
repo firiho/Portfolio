@@ -129,7 +129,10 @@ const About = () => {
     'Python',
     'JavaScript',
     'SQL',
-    'React',
+    'React.js',
+    'Node.js',
+    'Express.js',
+    'AWS',
     'Gatsby',
     'Flask',
     'TensorFlow',
@@ -153,7 +156,7 @@ const About = () => {
             </p>
             <p>
               I am passionate about using technology to solve real-world problems and making a
-              positive impact on society. I am particularly interested in Software Engineering, Data
+              positive impact on society. I am particularly interested in full stack Software Engineering, Data
               Science and machine learning.
             </p>
 
