@@ -1,16 +1,18 @@
 ---
-date: '2'
-title: 'Coffee Order App'
-cover: './demo.png'
+date: '2022'
+title: 'Cafe App'
 github: 'https://github.com/firiho/Scheduler-App'
-external: 'https://github.com/firiho/Scheduler-App'
-cta: false
 tech:
   - Flutter
   - Firebase
   - Dart
   - Android Studio
   - Xcode
+company: 'Flutter Online Course'
+showInProjects: true
+android: false
+ios: false
+external: 'https://github.com/firiho/Scheduler-App'
 ---
 
 I built a mobile app to send and receive coffee orders. This is deployable on both Android and iOS devices.
