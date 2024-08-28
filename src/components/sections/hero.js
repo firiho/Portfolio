@@ -70,9 +70,9 @@ const Hero = () => {
   const four = (
     <>
       <p>
-        I’m an aspiring full stack software engineer, junior at Minerva University, and currently interning at{' '}
-        <a href="https://www.ul.com/" target="_blank" rel="noreferrer">
-          UL Solutions
+        I’m an aspiring full stack software engineer and data scientist, junior at Minerva University, and currently interning as a Software Engineer Fellow at{' '}
+        <a href="https://headstarter.co/" target="_blank" rel="noreferrer">
+          Headstarter AI
         </a>
         .
       </p>

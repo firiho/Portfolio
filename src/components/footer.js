@@ -107,7 +107,7 @@ const Footer = () =>
 
       <StyledCredit tabindex="-1">
         <a href="https://github.com/firiho/Portfolio">
-          <div>Designed by Brittany Chiang &amp; Modified by Flambeau Iriho</div>
+          <div>Hosted on Netlify by Flambeau Iriho</div>
           {/* 
           {githubInfo.stars && githubInfo.forks && (
             <div className="github-stats">
