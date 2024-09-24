@@ -2,8 +2,8 @@
 date: '1'
 title: 'Mood.io'
 cover: './demo.png'
-github: 'https://github.com/firiho/Scheduler-App'
-external: 'https://github.com/firiho/Scheduler-App'
+github: 'https://github.com/firiho/Mood-io'
+external: 'https://github.com/firiho/Mood-io'
 cta: false
 tech:
   - React
