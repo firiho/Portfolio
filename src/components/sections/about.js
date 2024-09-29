@@ -151,18 +151,18 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello! I am a Computer Science and Artificial Intelligence student at{' '}
+              Hello there! I am a Computer Science and Artificial Intelligence student at{' '}
               <a href="https://www.minerva.edu/"> Minerva University</a> in San Francisco, CA.
             </p>
             <p>
-              I am passionate about using technology to solve real-world problems and making a
-              positive impact on society. I am particularly interested in full stack Software Engineering, Data
-              Science and machine learning.
+            I am passionate about innovating and build transformative software solutions that enhance user experiences 
+            and create value in people's lives. 
+            I am particularly interested in full stack Software Engineering, Data Science and Machine Learning.
             </p>
 
             <p>I am also a Music Producer and can play up to 5 musical instruments.</p>
 
-            <p>The following are technologies I have been working with lately:</p>
+            <p>The following are programming languages and technologies I have been working with lately:</p>
           </div>
 
           <ul className="skills-list">
