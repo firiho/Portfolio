@@ -1,7 +1,7 @@
 ---
 date: '3'
 title: 'Block Jumper Adventure'
-cover: './demo.png'
+cover: 'demo.png'
 github: 'https://github.com/firiho/Adventure-Game'
 external: 'https://github.com/firiho/Adventure-Game'
 cta: false
