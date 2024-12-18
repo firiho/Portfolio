@@ -7,7 +7,6 @@ slug: /pensieve/seoul
 tags:
   - history
   - travel
-  - minerva
 ---
 
 ## Minerva x Sookmyung buddy program
