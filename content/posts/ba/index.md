@@ -16,6 +16,7 @@ Minerva provided us with free tickets to the Messi Experience at Bouchard Plaza 
 Here are some photos from the day.
 
 <img src='./1.png'>
+<img src='./2.png'>
 <img src='./3.png'>
 <img src='./4.png'>
 <img src='./5.png'>
