@@ -1,6 +1,6 @@
 ---
 date: '2026'
-title: 'Computer Science and AI Student'
+title: 'Computer Science and Artificial Intelligence Student'
 company: 'Minerva University'
 location: 'San Francisco, CA'
 range: 'Sep 2022 - Present'

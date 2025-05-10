@@ -60,8 +60,7 @@ const Contact = () => {
       <h2 className="title">Get In Touch</h2>
 
       <p>
-        As I am currently looking for opportunities for the Summer 2025 or part time Fall/Spring
-        (San Francisco) opportunities, my inbox is always open. Whether you have an opportunity for
+        My inbox is always open. Whether you have an opportunity for
         me, a question or just want to say hi, I'll get back to you as soon as possible!
       </p>
 

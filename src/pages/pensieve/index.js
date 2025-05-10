@@ -151,7 +151,7 @@ const PensievePage = ({ location, data }) => {
 
       <StyledMainContainer>
         <header>
-          <h1 className="big-heading">Shenanigans</h1>
+          <h1 className="big-heading">My Shenanigans</h1>
           <p className="subtitle">
     
               a collection of memories
