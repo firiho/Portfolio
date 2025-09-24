@@ -61,16 +61,29 @@ const Hero = () => {
   }, []);
 
   const one = <h1 style={{marginTop:'20px'}}>Hi, my name is</h1>;
-  const two = <h2 className="big-heading">Flambeau Iriho.</h2>;
+  const two = <h2 className="big-heading">Flambeau Iriho</h2>;
   const three = (
     <h3 className="big-heading">
-      I love embracing challenges and creating impactful software products.
+      {/* I turn complex problems into simple, useful software. */}
+      I make cool things for the web.
     </h3>
   );
   const four = (
     <>
       <p>
-        I’m an aspiring full stack software engineer, rising senior at Minerva University, Co-Founder of UApply, and currently interning as a Software Engineer at{' '}
+        Full-stack engineer and CS and AI senior at {' '}
+        <a href="https://www.minerva.edu/" target="_blank" rel="noreferrer">
+          Minerva University
+        </a>
+        . Co-founder and Lead engineer at{' '}
+        <a href="https://www.uapply.africa/" target="_blank" rel="noreferrer">
+          UAPPLY
+        </a>
+        {' and '}
+        <a href="https://www.genlink.africa/" target="_blank" rel="noreferrer">
+          GenLink
+        </a>
+        {'. Former Software Engineer Intern at '}
         <a href="https://www.ebay.com/" target="_blank" rel="noreferrer">
           eBay
         </a>

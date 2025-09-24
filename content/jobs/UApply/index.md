@@ -1,11 +1,11 @@
 ---
-date: '8'
-title: 'Co-Founder & Software Engineer'
-company: 'UApply'
+date: '9'
+title: 'Co-Founder & Lead Software Engineer'
+company: 'UAPPLY'
 location: 'San Francisco, CA'
 range: 'Jan 2025 - Present'
 url: 'https://uapply.africa/'
 ---
 
 - Streamlining university admissions across Africa with a unified, efficient, and transparent platform.
-- I am responsible for the UApply's full-stack development, including the design and implementation of the platform's architecture.
+- I am responsible for the UAPPLY's full-stack development, including the design and implementation of the platform's architecture.

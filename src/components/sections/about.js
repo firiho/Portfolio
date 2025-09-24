@@ -127,11 +127,15 @@ const About = () => {
 
   const skills = [
     'Python',
-    'JavaScript',
+    'JavaScript/TypeScript',
     'SQL',
     'React.js',
+    'Next.js',
+    'Marko.js',
     'Node.js',
     'Express.js',
+    'PostgreSQL',
+    'GraphQL',
     'AWS',
     'Gatsby',
     'Flask',
@@ -140,6 +144,7 @@ const About = () => {
     'Pandas',
     'Matplotlib',
     'Git',
+    'Jenkins',
     'Docker',
   ];
 
