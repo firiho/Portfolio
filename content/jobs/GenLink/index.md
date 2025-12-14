@@ -1,5 +1,5 @@
 ---
-date: '9'
+date: '2024-09-01'
 title: 'Co-Founder & Lead Software Engineer'
 company: 'GenLink'
 location: 'San Francisco, CA'

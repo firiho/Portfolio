@@ -1,5 +1,5 @@
 ---
-date: '7'
+date: '2024-07-01'
 title: 'Software Engineer Fellow'
 company: 'Headstarter AI'
 location: 'San Francisco, CA'

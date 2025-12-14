@@ -154,7 +154,7 @@ const PensievePage = ({ location, data }) => {
           <h1 className="big-heading">My Shenanigans</h1>
           <p className="subtitle">
     
-              a collection of memories
+              a collection of posts
             
           </p>
         </header>
@@ -184,7 +184,7 @@ const PensievePage = ({ location, data }) => {
                       <ul className="post__tags">
                         {tags.map((tag, i) => (
                           <li key={i}>
-                            <Link to={`/pensieve/tags/${kebabCase(tag)}/`} className="inline-link">
+                            <Link to={`/blog/tags/${kebabCase(tag)}/`} className="inline-link">
                               #{tag}
                             </Link>
                           </li>

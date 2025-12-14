@@ -1,5 +1,5 @@
 ---
-date: '4'
+date: '3'
 title: 'Block Jumper Adventure'
 cover: './demo.png'
 github: 'https://github.com/firiho/Adventure-Game'

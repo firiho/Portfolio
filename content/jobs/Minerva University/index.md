@@ -1,5 +1,5 @@
 ---
-date: '2'
+date: '2023-09-01'
 title: 'Admissions Intern'
 company: 'Minerva University'
 location: 'San Francisco, CA'

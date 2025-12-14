@@ -2,8 +2,8 @@
 title: Seoul Exploration
 description: A collection of photos from my historical sites exploration day in Seoul, South Korea
 date: 2023-10-05
-draft: false
-slug: /pensieve/seoul
+draft: true
+slug: /blog/seoul
 tags:
   - history
   - travel

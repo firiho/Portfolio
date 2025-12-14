@@ -1,5 +1,5 @@
 ---
-date: '1'
+date: '2020-07-01'
 title: 'Web Developer'
 company: 'Zaniheza'
 location: 'Kigali, Rwanda'

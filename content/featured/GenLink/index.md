@@ -1,5 +1,5 @@
 ---
-date: '1'
+date: '2'
 title: 'GenLink'
 cover: './demo.png'
 external: 'https://genlink.africa/'

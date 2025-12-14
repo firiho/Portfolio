@@ -2,8 +2,8 @@
 title: The Messi Experiment
 description: A collection of photos from the Messi Experience in Buenos Aires, Argentina.
 date: 2024-10-13
-draft: false
-slug: /pensieve/messi
+draft: true
+slug: /blog/messi
 tags:
   - messi
   - football

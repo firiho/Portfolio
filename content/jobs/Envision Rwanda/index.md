@@ -1,5 +1,5 @@
 ---
-date: '4'
+date: '2020-05-01'
 title: 'Software Engineer'
 company: 'Envision Media Arts and Collective'
 location: 'Kigali, Rwanda'

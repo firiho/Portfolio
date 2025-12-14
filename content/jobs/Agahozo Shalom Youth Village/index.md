@@ -1,5 +1,5 @@
 ---
-date: '3'
+date: '2020-01-01'
 title: 'Computer Science Teaching Assistant'
 company: 'CMU CS Academy'
 location: 'Rwamagana, Rwanda'

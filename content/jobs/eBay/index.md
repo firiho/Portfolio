@@ -1,5 +1,5 @@
 ---
-date: '8'
+date: '2025-05-19'
 title: 'Software Engineer Intern'
 company: 'eBay'
 location: 'San Jose, CA'

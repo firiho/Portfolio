@@ -1,5 +1,5 @@
 ---
-date: '9'
+date: '2025-01-01'
 title: 'Co-Founder & Lead Software Engineer'
 company: 'UAPPLY'
 location: 'San Francisco, CA'
