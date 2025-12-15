@@ -415,7 +415,18 @@ Without the base, you can't distinguish between:
 - "A changed X to Y, B kept X" (take Y)
 - "A changed X to Y, B changed X to Z" (conflict!)
 
-The base provides **context** for intelligent merging: this is why merge bases matter. In Lit, you can even auto-resolve conflicts with `lit merge feature --auto`.
+The base provides **context** for intelligent merging: this is why merge bases matter.
+
+### Auto-Merge Strategies
+
+When conflicts arise, Lit offers automatic resolution with `lit merge feature --auto`. By default, the `recent` strategy is used, where the most recent commits take precedence. But you have options:
+
+- `lit merge feature --auto` uses `recent` strategy by default
+- `lit merge feature --auto=ours` keeps the current branch's version
+- `lit merge feature --auto=theirs` takes the incoming branch's version
+- `lit merge feature --auto=union` combines both versions
+
+This could particularly be useful in CI/CD pipelines or when you have a clear policy about which branch should "win" in conflicts.
 
 ---
 
