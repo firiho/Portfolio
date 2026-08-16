@@ -1,7 +1,7 @@
 ---
 date: '2024'
 title: 'Mood.io'
-github: 'https://github.com/firiho/Mood-io'
+github: 'https://github.com/firiho/mood'
 tech:
   - React
   - AWS
@@ -14,7 +14,7 @@ company: ''
 showInProjects: true
 android: false
 ios: false
-external: 'https://github.com/firiho/Mood-io'
+external: 'https://github.com/firiho/mood'
 ---
 
 A movie and music recommendation web app and algorithm based on users' moods. I developed it using public APIs like Spotify and RapidAPI to gain access to a vast library of songs and movies.

@@ -12,7 +12,7 @@ module.exports = {
     },
     {
       name: 'Instagram',
-      url: 'https://www.instagram.com/iriho_flambeau/',
+      url: 'https://www.instagram.com/iflambeau/',
     },
   ],
 
@@ -32,10 +32,6 @@ module.exports = {
     {
       name: 'Projects',
       url: '/#projects',
-    },
-    {
-      name: 'Contact',
-      url: '/#contact',
     },
   ],
 

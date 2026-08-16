@@ -1,17 +1,13 @@
 ---
-date: '1'
+date: '2'
 title: 'Lit'
 cover: './demo.png'
 github: 'https://github.com/firiho/lit'
 external: '/blog/lit'
-cta: false
+cta: '/blog/lit'
 tech:
   - Python
-  - Distributed Systems
   - Git Internals
-  - Version Control System
-  - Object-Oriented Design
 ---
 
-A complete implementation of Git's core version control features in Python, providing fully functional distributed version control capabilities including branching, merging, rebasing, stashing, and remote repository operations. Implements 27 Git commands with a Git-compatible object database using SHA-1 hashing, featuring content-addressable storage and three-way merge algorithms.
-
+A distributed version control system built from scratch in Python. Implements Git's object model — blobs, trees, and commits in a SHA-1 content-addressable store — with branching, three-way merges with pluggable auto-resolution strategies, rebase, stash, and fetch/push to remote repositories. 27 commands, backed by 358 tests.

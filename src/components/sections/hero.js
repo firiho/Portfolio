@@ -60,34 +60,29 @@ const Hero = () => {
     return () => clearTimeout(timeout);
   }, []);
 
-  const one = <h1 style={{marginTop:'20px'}}>Hi, my name is</h1>;
+  const one = <h1 style={{ marginTop: '20px' }}>Hi, my name is</h1>;
   const two = <h2 className="big-heading">Flambeau Iriho</h2>;
   const three = (
-    <h3 className="big-heading">
-      {/* I turn complex problems into simple, useful software. */}
-      I make cool things for the web.
-    </h3>
+    <h3 className="big-heading">I turn complex problems into simple, useful software.</h3>
   );
   const four = (
     <>
       <p>
-        Full-stack engineer and CS and AI senior at {' '}
-        <a href="https://www.minerva.edu/" target="_blank" rel="noreferrer">
-          Minerva University
-        </a>
-        . Co-founder and Lead engineer at{' '}
+        Software Engineer at{' '}
+        <a href="https://www.ebay.com/" target="_blank" rel="noreferrer">
+          eBay
+        </a>{' '}
+        (Seller Experience), building AI-enabled listing experiences — the listing platform I built
+        as an intern boosted listing speed 3×. Co-founder & CTO of{' '}
         <a href="https://www.uapply.africa/" target="_blank" rel="noreferrer">
           UAPPLY
         </a>
-        {' and '}
-        <a href="https://www.genlink.africa/" target="_blank" rel="noreferrer">
-          GenLink
-        </a>
-        {'. Former Software Engineer Intern at '}
-        <a href="https://www.ebay.com/" target="_blank" rel="noreferrer">
-          eBay
-        </a>
-        .
+        , an angel-funded platform that submits 4,000+ university applications at once in under 10
+        seconds.{' '}
+        <a href="https://www.minerva.edu/" target="_blank" rel="noreferrer">
+          Minerva University
+        </a>{' '}
+        B.S. in Computer Science & AI, Class of 2026.
       </p>
     </>
   );

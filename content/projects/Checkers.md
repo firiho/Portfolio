@@ -1,12 +1,11 @@
 ---
 date: '2021'
 title: 'Checkers'
-github: '404'
 tech:
   - Pygame
   - Python
 company: 'CMU CS Academy'
-showInProjects: true
+showInProjects: false
 android: false
 ios: false
 external: 'https://academy.cs.cmu.edu/sharing/antiqueWhiteGoldfish7911'

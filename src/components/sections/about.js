@@ -128,24 +128,24 @@ const About = () => {
   const skills = [
     'Python',
     'JavaScript/TypeScript',
-    'SQL',
+    'Java',
+    'SQL (PostgreSQL, ...)',
     'React.js',
     'Next.js',
     'Marko.js',
     'Node.js',
     'Express.js',
-    'PostgreSQL',
     'GraphQL',
-    'AWS',
-    'Gatsby',
+    'Firebase',
+    'Spring Boot',
+    'Flutter',
     'Flask',
-    'TensorFlow',
-    'NumPy',
-    'Pandas',
-    'Matplotlib',
-    'Git',
+    'FastAPI',
+    'AWS',
     'Jenkins',
-    'Docker',
+    'Pandas',
+    'NumPy',
+    'Git',
   ];
 
   return (
@@ -156,18 +156,23 @@ const About = () => {
         <StyledText>
           <div>
             <p>
-              Hello there! I am a Computer Science and Artificial Intelligence student at{' '}
-              <a href="https://www.minerva.edu/"> Minerva University</a> in San Francisco, CA.
+              Hello there! I am a Software Engineer at eBay in San Jose, CA, and co-founder & CTO of
+              UAPPLY. I graduated from <a href="https://www.minerva.edu/"> Minerva University</a> in
+              San Francisco with a B.S. in Computer Science and Artificial Intelligence (minor in
+              Business) in May 2026.
             </p>
             <p>
-            I am passionate about innovating and build transformative software solutions that enhance user experiences 
-            and create value in people's lives. 
-            I am particularly interested in full stack Software Engineering, Data Science and Machine Learning.
+              I am passionate about innovating and build transformative software solutions that
+              enhance user experiences and create value in people's lives. I am particularly
+              interested in full stack Software Engineering, Data Science and Machine Learning.
             </p>
 
-            <p>I am also a Music Producer and can play up to 5 musical instruments.</p>
+            <p>I am also a music producer and play piano, guitar, and drums.</p>
 
-            <p>The following are programming languages and technologies I have been working with lately:</p>
+            <p>
+              The following are programming languages and technologies I have been working with
+              lately:
+            </p>
           </div>
 
           <ul className="skills-list">

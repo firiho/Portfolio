@@ -4,9 +4,9 @@ module.exports = {
   siteMetadata: {
     title: 'Flambeau Iriho',
     description:
-      'Flambeau Iriho is a software engineer and a junior at Minerva University. He is passionate about building software that solves real-world problems and has a positive impact on society.',
+      'Flambeau Iriho is a Software Engineer at eBay and co-founder & CTO of UAPPLY. A Minerva University computer science & AI graduate, he is passionate about building software that solves real-world problems and has a positive impact on society.',
     siteUrl: 'https://irihoflambeau.com',
-    image: 'og.png', 
+    image: 'og.png',
     twitterUsername: '',
   },
   plugins: [
@@ -148,12 +148,6 @@ module.exports = {
             },
           },
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-google-analytics`,
-      options: {
-        trackingId: 'G-KBJ3HD59L2',
       },
     },
   ],

@@ -1,15 +1,14 @@
 ---
-date: '2'
+date: '3'
 title: 'GenLink'
 cover: './demo.png'
 external: 'https://genlink.africa/'
-cta: false
 tech:
   - React
-  - Firebase Auth
-  - Firestore
+  - TypeScript
   - Node.js
   - Express
+  - Firebase
 ---
 
-GenLink is a platform that connects job seekers and talented people with employers in Rwanda through hackathons and challenges, making the job search process more efficient and expanding the talent pool for local companies.
+GenLink is a hackathon hosting platform for Rwanda's tech ecosystem — companies host hackathons and challenges, builders compete, and top performers get discovered and hired. Built with React, TypeScript, Node/Express, and Firebase. Live at [genlink.africa](https://genlink.africa/).

@@ -1,7 +1,6 @@
 ---
 date: '2024'
 title: 'AI Customer Service Chatbot'
-github: 'https://github.com/firiho/ai-chatbot'
 tech:
   - React.js
   - AWS
@@ -10,7 +9,6 @@ company: 'Headstarter AI'
 showInProjects: true
 android: false
 ios: false
-external: 'https://github.com/firiho/ai-chatbot'
 ---
 
-This is an AI customer service chatbot equiped with tailored responses and memory retention. Built it with React.js and AWS's bedrock API.
+An AI customer-service chatbot with tailored responses and memory retention, so the bot keeps prior details across a conversation. Built with React.js and AWS's Bedrock API.
