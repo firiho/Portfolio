@@ -42,7 +42,10 @@ const StyledContactSection = styled.section`
 `;
 
 const Contact = () => {
-  const revealContainer = useRef(null);
+  const revealOverline = useRef(null);
+  const revealTitle = useRef(null);
+  const revealText = useRef(null);
+  const revealButton = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
 
   useEffect(() => {
@@ -50,21 +53,30 @@ const Contact = () => {
       return;
     }
 
-    sr.reveal(revealContainer.current, srConfig());
+    // Finale cadence: overline leads, title lands a beat later, then the
+    // paragraph, and the Say Hello button arrives last.
+    sr.reveal(revealOverline.current, srConfig(100));
+    sr.reveal(revealTitle.current, srConfig(200));
+    sr.reveal(revealText.current, srConfig(300));
+    sr.reveal(revealButton.current, srConfig(450));
   }, []);
 
   return (
-    <StyledContactSection id="contact" ref={revealContainer}>
-      <h2 className="numbered-heading overline">What’s Next?</h2>
+    <StyledContactSection id="contact">
+      <h2 className="numbered-heading overline" ref={revealOverline}>
+        What’s Next?
+      </h2>
 
-      <h2 className="title">Get In Touch</h2>
+      <h2 className="title" ref={revealTitle}>
+        Get In Touch
+      </h2>
 
-      <p>
-        My inbox is always open. Whether you have an opportunity for
-        me, a question or just want to say hi, I'll get back to you as soon as possible!
+      <p ref={revealText}>
+        My inbox is always open. Whether you have an opportunity for me, a question or just want to
+        say hi, I'll get back to you as soon as possible!
       </p>
 
-      <a className="email-link" href={`mailto:${email}`}>
+      <a className="email-link" href={`mailto:${email}`} ref={revealButton}>
         Say Hello
       </a>
     </StyledContactSection>

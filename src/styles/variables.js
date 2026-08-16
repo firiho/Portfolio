@@ -40,6 +40,18 @@ const variables = css`
     --easing: cubic-bezier(0.645, 0.045, 0.355, 1);
     --transition: all 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
 
+    /* Motion system: one voice for every entrance, settle, and draw */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    /* Mechanical snaps only (tab indicator): single ~8% overshoot */
+    --ease-detent: cubic-bezier(0.3, 1.3, 0.4, 1);
+    --beat: 90ms;
+    --dur-press: 80ms;
+    --dur-entrance: 450ms;
+    --dur-mask: 700ms;
+    --dur-draw: 900ms;
+    /* --sp is written per-element by the scroll engine (useScrollProgress);
+       consumers read var(--sp, 0) so SSR/no-JS/reduced-motion compute to identity */
+
     --hamburger-width: 30px;
 
     --ham-before: top 0.1s ease-in 0.25s, opacity 0.1s ease-in;

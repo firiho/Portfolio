@@ -3,7 +3,7 @@ import { StaticImage } from 'gatsby-plugin-image';
 import styled from 'styled-components';
 import { srConfig } from '@config';
 import sr from '@utils/sr';
-import { usePrefersReducedMotion } from '@hooks';
+import { usePrefersReducedMotion, useScrollProgress } from '@hooks';
 
 const StyledAboutSection = styled.section`
   max-width: 900px;
@@ -49,6 +49,13 @@ const StyledText = styled.div`
 const StyledPic = styled.div`
   position: relative;
   max-width: 300px;
+
+  /* The portrait unit floats gently against the static text column,
+     scrubbed by the shared --sp engine (inherited from the section). */
+  @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+    transform: perspective(900px) translate3d(0, calc(var(--sp, 0) * -18px), 0)
+      rotateY(calc(var(--sp, 0) * -6deg));
+  }
 
   @media (max-width: 768px) {
     margin: 50px auto 0;
@@ -116,6 +123,7 @@ const StyledPic = styled.div`
 const About = () => {
   const revealContainer = useRef(null);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const track = useScrollProgress(!prefersReducedMotion);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -123,6 +131,12 @@ const About = () => {
     }
 
     sr.reveal(revealContainer.current, srConfig());
+
+    // Skills cascade: a half-beat (45ms) two-column ripple; the list's
+    // overflow: hidden masks the bottom rows' rise like the hero sleeves.
+    revealContainer.current.querySelectorAll('.skills-list li').forEach((item, i) => {
+      sr.reveal(item, { ...srConfig(300 + i * 45, 0.2), distance: '10px', duration: 400 });
+    });
   }, []);
 
   const skills = [
@@ -149,7 +163,12 @@ const About = () => {
   ];
 
   return (
-    <StyledAboutSection id="about" ref={revealContainer}>
+    <StyledAboutSection
+      id="about"
+      ref={el => {
+        revealContainer.current = el;
+        track(el);
+      }}>
       <h2 className="numbered-heading">About Me</h2>
 
       <div className="inner">

@@ -117,6 +117,8 @@ const GlobalStyle = createGlobalStyle`
     max-width: 1600px;
     min-height: 100vh;
     padding: 200px 150px;
+    /* The stage: gives section entrances (ScrollReveal rotateX) true 3D depth */
+    perspective: 1400px;
 
     @media (max-width: 1080px) {
       padding: 200px 100px;
@@ -214,6 +216,7 @@ const GlobalStyle = createGlobalStyle`
       height: 1px;
       margin-left: 20px;
       background-color: var(--lightest-navy);
+      transform-origin: left;
 
       @media (max-width: 1080px) {
         width: 200px;
@@ -223,6 +226,19 @@ const GlobalStyle = createGlobalStyle`
       }
       @media (max-width: 600px) {
         margin-left: 10px;
+      }
+    }
+
+    /* Self-drawing rules: JS (utils/ruleDraw) arms below-fold headings with
+       .rule-ready and draws them on approach — SSR/no-JS never sees the
+       hidden state. */
+    @media (prefers-reduced-motion: no-preference) {
+      &.rule-ready:after {
+        transform: scaleX(0);
+      }
+      &.rule-drawn:after {
+        transform: scaleX(1);
+        transition: transform var(--dur-draw) var(--ease-out-expo) 150ms;
       }
     }
   }
@@ -362,6 +378,10 @@ const GlobalStyle = createGlobalStyle`
 
   .skip-to-content {
     ${({ theme }) => theme.mixins.button};
+    &:active {
+      transform: none;
+      box-shadow: none;
+    }
     position: absolute;
     top: auto;
     left: -999px;

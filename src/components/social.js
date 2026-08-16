@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { socialMedia } from '@config';
 import { Side } from '@components';
 import { Icon } from '@components/icons';
+
+const railDraw = keyframes`
+  from {
+    transform: scaleY(0);
+  }
+`;
 
 const StyledSocialList = styled.ul`
   display: flex;
@@ -21,6 +27,18 @@ const StyledSocialList = styled.ul`
     margin: 0 auto;
     background-color: var(--light-slate);
   }
+
+  /* On home, the hairline draws itself upward as part of the overture */
+  ${({ isHome }) =>
+    isHome &&
+    css`
+      @media (prefers-reduced-motion: no-preference) {
+        &:after {
+          transform-origin: bottom;
+          animation: ${railDraw} 1s var(--ease-out-expo) 200ms backwards;
+        }
+      }
+    `}
 
   li {
     &:last-of-type {
@@ -45,7 +63,7 @@ const StyledSocialList = styled.ul`
 
 const Social = ({ isHome }) => (
   <Side isHome={isHome} orientation="left">
-    <StyledSocialList>
+    <StyledSocialList isHome={isHome}>
       {socialMedia &&
         socialMedia.map(({ url, name }, i) => (
           <li key={i}>

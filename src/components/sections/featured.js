@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import sr from '@utils/sr';
 import { srConfig } from '@config';
 import { Icon } from '@components/icons';
-import { usePrefersReducedMotion } from '@hooks';
+import { usePrefersReducedMotion, useScrollProgress } from '@hooks';
 
 const StyledProjectsGrid = styled.ul`
   ${({ theme }) => theme.mixins.resetList};
@@ -250,7 +250,7 @@ const StyledProject = styled.li`
     @media (max-width: 768px) {
       grid-column: 1 / -1;
       height: 100%;
-      opacity: 0.25;
+      opacity: 0.15;
     }
 
     a {
@@ -291,14 +291,60 @@ const StyledProject = styled.li`
     .img {
       border-radius: var(--border-radius);
       mix-blend-mode: multiply;
-      filter: grayscale(100%) contrast(1) brightness(90%);
+      filter: grayscale(100%) contrast(1) brightness(70%);
 
       @media (max-width: 768px) {
         object-fit: cover;
         width: auto;
         height: 100%;
-        filter: grayscale(100%) contrast(1) brightness(50%);
+        filter: grayscale(100%) contrast(1) brightness(35%);
       }
+    }
+  }
+
+  /* Layered plates: as the card crosses the viewport, the screenshot
+     drifts up to 20px while the text plate drifts 8px the other way —
+     scrubbed 1:1 by the shared --sp engine, identity when untracked.
+     The transition override on the anchor kills the global link
+     transition so the scrub never lags a frame behind the scroll. */
+  @media (min-width: 769px) and (prefers-reduced-motion: no-preference) {
+    .project-image a {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--border-radius);
+      transform: perspective(1200px) translate3d(0, calc(var(--sp, 0) * -32px), 0)
+        rotateX(calc(var(--sp, 0) * 7deg));
+      transition: background-color 0.3s var(--ease-out-expo);
+    }
+
+    .project-image a .img {
+      transition: transform 0.5s var(--ease-out-expo), filter 0.3s var(--ease-out-expo);
+    }
+
+    .project-image a:hover .img,
+    .project-image a:focus .img {
+      transform: scale(1.03);
+    }
+
+    .project-content > div {
+      position: relative;
+      z-index: 2;
+      transform: translate3d(0, calc(var(--sp, 0) * 14px), 0);
+      /* Let the image's hover work through the wrapper's transparent gaps */
+      pointer-events: none;
+
+      a,
+      .project-description,
+      .project-tech-list,
+      .project-links {
+        pointer-events: auto;
+      }
+    }
+
+    &.in-view .project-image a,
+    &.in-view .project-content > div {
+      will-change: transform;
     }
   }
 `;
@@ -363,6 +409,7 @@ const Featured = () => {
   const revealTitle = useRef(null);
   const revealProjects = useRef([]);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const track = useScrollProgress(!prefersReducedMotion);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -386,7 +433,12 @@ const Featured = () => {
             const image = getImage(cover);
 
             return (
-              <StyledProject key={i} ref={el => (revealProjects.current[i] = el)}>
+              <StyledProject
+                key={i}
+                ref={el => {
+                  revealProjects.current[i] = el;
+                  track(el);
+                }}>
                 <div className="project-content">
                   <div>
                     <p className="project-overline">Featured Project</p>

@@ -8,7 +8,7 @@ import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledJobsSection = styled.section`
-  max-width: 700px;
+  max-width: 900px;
   .inner {
     display: flex;
     @media (max-width: 600px) {
@@ -92,6 +92,11 @@ const StyledTabButton = styled.button`
   &:focus {
     background-color: var(--light-navy);
   }
+
+  &:active {
+    transform: translateY(1px);
+    transition: transform var(--dur-press) var(--ease-out-expo);
+  }
 `;
 
 const StyledHighlight = styled.div`
@@ -104,8 +109,11 @@ const StyledHighlight = styled.div`
   border-radius: var(--border-radius);
   background: var(--green);
   transform: translateY(calc(${({ activeTabId }) => activeTabId} * var(--tab-height)));
-  transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition-delay: 0.1s;
+
+  /* Detent: travels with a single tight overshoot; instant under reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.4s var(--ease-detent);
+  }
   @media (max-width: 600px) {
     top: auto;
     bottom: 0;
@@ -132,7 +140,15 @@ const StyledTabPanels = styled.div`
 const StyledTabPanel = styled.div`
   width: 100%;
   height: auto;
-  padding: 10px 5px;
+  padding: 25px 30px;
+  background-color: var(--light-navy);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--lightest-navy);
+
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
+
   ul {
     ${({ theme }) => theme.mixins.fancyList};
   }
@@ -151,6 +167,8 @@ const StyledTabPanel = styled.div`
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
   }
+
+  ${({ theme }) => theme.mixins.tabPanelCascade};
 `;
 
 const Jobs = () => {
@@ -246,11 +264,11 @@ const Jobs = () => {
                   isActive={activeTabId === i}
                   onClick={() => setActiveTabId(i)}
                   ref={el => (tabs.current[i] = el)}
-                  id={`tab-${i}`}
+                  id={`edu-tab-${i}`}
                   role="tab"
                   tabIndex={activeTabId === i ? '0' : '-1'}
                   aria-selected={activeTabId === i ? true : false}
-                  aria-controls={`panel-${i}`}>
+                  aria-controls={`edu-panel-${i}`}>
                   <span>{company}</span>
                 </StyledTabButton>
               );
@@ -265,12 +283,16 @@ const Jobs = () => {
               const { title, url, company, range } = frontmatter;
 
               return (
-                <CSSTransition key={i} in={activeTabId === i} timeout={250} classNames="fade">
+                <CSSTransition
+                  key={i}
+                  in={activeTabId === i}
+                  timeout={{ enter: 800, exit: 250 }}
+                  classNames="fade">
                   <StyledTabPanel
-                    id={`panel-${i}`}
+                    id={`edu-panel-${i}`}
                     role="tabpanel"
                     tabIndex={activeTabId === i ? '0' : '-1'}
-                    aria-labelledby={`tab-${i}`}
+                    aria-labelledby={`edu-tab-${i}`}
                     aria-hidden={activeTabId !== i}
                     hidden={activeTabId !== i}>
                     <h3>

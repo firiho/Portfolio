@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
+import initRuleDraw from '../utils/ruleDraw';
 
 const StyledContent = styled.div`
   display: flex;
@@ -44,6 +45,21 @@ const Layout = ({ children, location }) => {
     }
 
     handleExternalLinks();
+
+    const cleanupRuleDraw = initRuleDraw();
+
+    // ScrollReveal failsafe: reloads with restored scroll (and dev hot
+    // reloads) can bind reveal targets while the viewport is mid-flight,
+    // leaving in-view sections invisible until the next scroll event.
+    // A few resize nudges make ScrollReveal re-check visibility.
+    const nudges = [800, 2000, 4500].map(ms =>
+      setTimeout(() => window.dispatchEvent(new Event('resize')), ms),
+    );
+
+    return () => {
+      cleanupRuleDraw();
+      nudges.forEach(clearTimeout);
+    };
   }, [isLoading]);
 
   return (

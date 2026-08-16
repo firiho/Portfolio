@@ -7,7 +7,7 @@ tech:
   - Next.js
   - TMDB API
 company: ''
-showInProjects: true
+showInProjects: false
 android: false
 ios: false
 external: 'https://watch.irihoflambeau.com'

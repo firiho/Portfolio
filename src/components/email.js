@@ -1,8 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { email } from '@config';
 import { Side } from '@components';
+
+const railDraw = keyframes`
+  from {
+    transform: scaleY(0);
+  }
+`;
 
 const StyledLinkWrapper = styled.div`
   display: flex;
@@ -18,6 +24,18 @@ const StyledLinkWrapper = styled.div`
     margin: 0 auto;
     background-color: var(--light-slate);
   }
+
+  /* On home, the hairline draws itself upward as part of the overture */
+  ${({ isHome }) =>
+    isHome &&
+    css`
+      @media (prefers-reduced-motion: no-preference) {
+        &:after {
+          transform-origin: bottom;
+          animation: ${railDraw} 1s var(--ease-out-expo) 200ms backwards;
+        }
+      }
+    `}
 
   a {
     margin: 20px auto;
@@ -37,7 +55,7 @@ const StyledLinkWrapper = styled.div`
 
 const Email = ({ isHome }) => (
   <Side isHome={isHome} orientation="right">
-    <StyledLinkWrapper>
+    <StyledLinkWrapper isHome={isHome}>
       <a href={`mailto:${email}`}>{email}</a>
     </StyledLinkWrapper>
   </Side>

@@ -2,12 +2,44 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { navLinks } from '@config';
 import { loaderDelay } from '@utils';
 import { useScrollDirection, usePrefersReducedMotion } from '@hooks';
 import { Menu } from '@components';
 import { IconLogo, IconHex } from '@components/icons';
+
+const navProgress = keyframes`
+  to {
+    transform: scaleX(1);
+  }
+`;
+
+/* Scroll-progress hairline: its own fixed element so it stays visible even
+   while the header hides on downward scroll. CSS scroll-driven animation —
+   simply absent in browsers without scroll-timeline support. */
+const StyledProgress = styled.div`
+  display: none;
+
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: scroll(root)) {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      z-index: 12;
+      background-color: var(--green);
+      opacity: 0.75;
+      transform: scaleX(0);
+      transform-origin: left;
+      pointer-events: none;
+      animation: ${navProgress} linear both;
+      animation-timeline: scroll(root);
+    }
+  }
+`;
 
 const StyledHeader = styled.header`
   ${({ theme }) => theme.mixins.flexBetween};
@@ -22,7 +54,8 @@ const StyledHeader = styled.header`
   pointer-events: auto !important;
   user-select: auto !important;
   backdrop-filter: blur(10px);
-  transition: var(--transition);
+  transition: height 0.4s var(--ease-out-expo), transform 0.4s var(--ease-out-expo),
+    background-color 0.3s ease, box-shadow 0.3s ease;
 
   @media (max-width: 1080px) {
     padding: 0 40px;
@@ -33,7 +66,7 @@ const StyledHeader = styled.header`
 
   @media (prefers-reduced-motion: no-preference) {
     ${props =>
-    props.scrollDirection === 'up' &&
+      props.scrollDirection === 'up' &&
       !props.scrolledToTop &&
       css`
         height: var(--nav-scroll-height);
@@ -43,7 +76,7 @@ const StyledHeader = styled.header`
       `};
 
     ${props =>
-    props.scrollDirection === 'down' &&
+      props.scrollDirection === 'down' &&
       !props.scrolledToTop &&
       css`
         height: var(--nav-scroll-height);
@@ -139,6 +172,26 @@ const StyledLinks = styled.div`
           font-size: var(--fz-xxs);
           text-align: right;
         }
+
+        /* Underline draws in from the left, exits collapsing to the right */
+        &:after {
+          content: '';
+          position: absolute;
+          left: 10px;
+          right: 10px;
+          bottom: 6px;
+          height: 1px;
+          background-color: var(--green);
+          transform: scaleX(0);
+          transform-origin: right;
+          transition: transform 0.25s var(--ease-out-expo);
+        }
+
+        &:hover:after,
+        &:focus-visible:after {
+          transform: scaleX(1);
+          transform-origin: left;
+        }
       }
     }
   }
@@ -216,73 +269,76 @@ const Nav = ({ isHome }) => {
   );
 
   return (
-    <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
-      <StyledNav>
-        {prefersReducedMotion ? (
-          <>
-            {Logo}
+    <>
+      <StyledProgress aria-hidden="true" />
+      <StyledHeader scrollDirection={scrollDirection} scrolledToTop={scrolledToTop}>
+        <StyledNav>
+          {prefersReducedMotion ? (
+            <>
+              {Logo}
 
-            <StyledLinks>
-              <ol>
-                {navLinks &&
-                  navLinks.map(({ url, name }, i) => (
-                    <li key={i}>
-                      <Link to={url}>{name}</Link>
-                    </li>
-                  ))}
-              </ol>
-              <div>{ResumeLink}</div>
-            </StyledLinks>
-
-            <Menu />
-          </>
-        ) : (
-          <>
-            <TransitionGroup component={null}>
-              {isMounted && (
-                <CSSTransition classNames={fadeClass} timeout={timeout}>
-                  <>{Logo}</>
-                </CSSTransition>
-              )}
-            </TransitionGroup>
-
-            <StyledLinks>
-              <ol>
-                <TransitionGroup component={null}>
-                  {isMounted &&
-                    navLinks &&
+              <StyledLinks>
+                <ol>
+                  {navLinks &&
                     navLinks.map(({ url, name }, i) => (
-                      <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
-                        <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
-                          <Link to={url}>{name}</Link>
-                        </li>
-                      </CSSTransition>
+                      <li key={i}>
+                        <Link to={url}>{name}</Link>
+                      </li>
                     ))}
-                </TransitionGroup>
-              </ol>
+                </ol>
+                <div>{ResumeLink}</div>
+              </StyledLinks>
 
+              <Menu />
+            </>
+          ) : (
+            <>
               <TransitionGroup component={null}>
                 {isMounted && (
-                  <CSSTransition classNames={fadeDownClass} timeout={timeout}>
-                    <div style={{ transitionDelay: `${isHome ? navLinks.length * 100 : 0}ms` }}>
-                      {ResumeLink}
-                    </div>
+                  <CSSTransition classNames={fadeClass} timeout={timeout}>
+                    <>{Logo}</>
                   </CSSTransition>
                 )}
               </TransitionGroup>
-            </StyledLinks>
 
-            <TransitionGroup component={null}>
-              {isMounted && (
-                <CSSTransition classNames={fadeClass} timeout={timeout}>
-                  <Menu />
-                </CSSTransition>
-              )}
-            </TransitionGroup>
-          </>
-        )}
-      </StyledNav>
-    </StyledHeader>
+              <StyledLinks>
+                <ol>
+                  <TransitionGroup component={null}>
+                    {isMounted &&
+                      navLinks &&
+                      navLinks.map(({ url, name }, i) => (
+                        <CSSTransition key={i} classNames={fadeDownClass} timeout={timeout}>
+                          <li key={i} style={{ transitionDelay: `${isHome ? i * 100 : 0}ms` }}>
+                            <Link to={url}>{name}</Link>
+                          </li>
+                        </CSSTransition>
+                      ))}
+                  </TransitionGroup>
+                </ol>
+
+                <TransitionGroup component={null}>
+                  {isMounted && (
+                    <CSSTransition classNames={fadeDownClass} timeout={timeout}>
+                      <div style={{ transitionDelay: `${isHome ? navLinks.length * 100 : 0}ms` }}>
+                        {ResumeLink}
+                      </div>
+                    </CSSTransition>
+                  )}
+                </TransitionGroup>
+              </StyledLinks>
+
+              <TransitionGroup component={null}>
+                {isMounted && (
+                  <CSSTransition classNames={fadeClass} timeout={timeout}>
+                    <Menu />
+                  </CSSTransition>
+                )}
+              </TransitionGroup>
+            </>
+          )}
+        </StyledNav>
+      </StyledHeader>
+    </>
   );
 };
 

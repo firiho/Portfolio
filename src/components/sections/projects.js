@@ -52,7 +52,16 @@ const StyledProject = styled.li`
     &:hover,
     &:focus-within {
       .project-inner {
-        transform: translateY(-7px);
+        transform: perspective(800px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg))
+          translateY(-7px);
+
+        &:after {
+          opacity: 1;
+        }
+      }
+
+      .folder svg {
+        transform: translateY(-3px);
       }
     }
   }
@@ -72,8 +81,22 @@ const StyledProject = styled.li`
     padding: 2rem 1.75rem;
     border-radius: var(--border-radius);
     background-color: var(--light-navy);
-    transition: var(--transition);
+    /* Pointer-tracked 3D tilt: --tx/--ty are written by onMouseMove */
+    transform: perspective(800px) rotateX(var(--tx, 0deg)) rotateY(var(--ty, 0deg));
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
     overflow: auto;
+
+    /* Machined edge: a 1px highlight that catches light on hover */
+    &:after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--lightest-navy);
+      border-radius: var(--border-radius);
+      opacity: 0;
+      transition: opacity 0.3s var(--ease-out-expo);
+      pointer-events: none;
+    }
   }
 
   .project-top {
@@ -85,6 +108,7 @@ const StyledProject = styled.li`
       svg {
         width: 40px;
         height: 40px;
+        transition: transform 0.3s var(--ease-out-expo);
       }
     }
 
@@ -203,13 +227,27 @@ const Projects = () => {
 
     sr.reveal(revealTitle.current, srConfig());
     sr.reveal(revealArchiveLink.current, srConfig());
-    revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 100)));
+    revealProjects.current.forEach((ref, i) => sr.reveal(ref, srConfig(i * 80)));
   }, []);
 
   const GRID_LIMIT = 3;
   const projects = data.projects.edges.filter(({ node }) => node);
   const firstSix = projects.slice(0, GRID_LIMIT);
   const projectsToShow = showMore ? projects : firstSix;
+
+  // Pointer-tracked 3D tilt (±5deg), smoothed by the card's own transition
+  const tiltCard = e => {
+    const card = e.currentTarget;
+    const r = card.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width - 0.5;
+    const py = (e.clientY - r.top) / r.height - 0.5;
+    card.style.setProperty('--ty', `${(px * 10).toFixed(2)}deg`);
+    card.style.setProperty('--tx', `${(-py * 8).toFixed(2)}deg`);
+  };
+  const resetTilt = e => {
+    e.currentTarget.style.removeProperty('--ty');
+    e.currentTarget.style.removeProperty('--tx');
+  };
 
   const projectInner = node => {
     const { frontmatter, html } = node;
@@ -286,11 +324,13 @@ const Projects = () => {
                 <CSSTransition
                   key={i}
                   classNames="fadeup"
-                  timeout={i >= GRID_LIMIT ? (i - GRID_LIMIT) * 300 : 300}
+                  timeout={i >= GRID_LIMIT ? 500 + (i - GRID_LIMIT) * 100 : 500}
                   exit={false}>
                   <StyledProject
                     key={i}
                     ref={el => (revealProjects.current[i] = el)}
+                    onMouseMove={tiltCard}
+                    onMouseLeave={resetTilt}
                     style={{
                       transitionDelay: `${i >= GRID_LIMIT ? (i - GRID_LIMIT) * 100 : 0}ms`,
                     }}>

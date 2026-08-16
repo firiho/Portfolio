@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
-import { navDelay, loaderDelay } from '@utils';
-import { usePrefersReducedMotion } from '@hooks';
+import { navDelay } from '@utils';
+import { usePrefersReducedMotion, useScrollProgress } from '@hooks';
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
@@ -15,6 +15,27 @@ const StyledHeroSection = styled.section`
   @media (max-height: 700px) and (min-width: 700px), (max-width: 360px) {
     height: auto;
     padding-top: var(--nav-height);
+  }
+
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  /* Scroll recession: as About arrives, the hero rises, shrinks a hair,
+     and dims — scrubbed 1:1 by the shared --sp engine, identity at rest. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-inner {
+      transform: perspective(1200px) translate3d(0, calc(var(--sp, 0) * -64px), 0)
+        rotateX(calc(var(--sp, 0) * 8deg)) scale(calc(1 - var(--sp, 0) * 0.045));
+      opacity: calc(1 - var(--sp, 0) * 0.45);
+      transform-origin: center top;
+    }
+    &.in-view .hero-inner {
+      will-change: transform, opacity;
+    }
   }
 
   h1 {
@@ -50,6 +71,7 @@ const StyledHeroSection = styled.section`
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   const prefersReducedMotion = usePrefersReducedMotion();
+  const track = useScrollProgress(!prefersReducedMotion);
 
   useEffect(() => {
     if (prefersReducedMotion) {
@@ -99,23 +121,29 @@ const Hero = () => {
   const items = [one, two, three, four, five];
 
   return (
-    <StyledHeroSection>
-      {prefersReducedMotion ? (
-        <>
-          {items.map((item, i) => (
-            <div key={i}>{item}</div>
-          ))}
-        </>
-      ) : (
-        <TransitionGroup component={null}>
-          {isMounted &&
-            items.map((item, i) => (
-              <CSSTransition key={i} classNames="fadeup" timeout={loaderDelay}>
-                <div style={{ transitionDelay: `${i + 1}00ms` }}>{item}</div>
-              </CSSTransition>
+    <StyledHeroSection ref={track}>
+      <div className="hero-inner">
+        {prefersReducedMotion ? (
+          <>
+            {items.map((item, i) => (
+              <div key={i}>{item}</div>
             ))}
-        </TransitionGroup>
-      )}
+          </>
+        ) : (
+          <TransitionGroup component={null}>
+            {isMounted &&
+              items.map((item, i) => (
+                <CSSTransition key={i} classNames="maskup" timeout={700 + i * 180}>
+                  <div className="mask-sleeve">
+                    <div className="mask-inner" style={{ transitionDelay: `${i * 180}ms` }}>
+                      {item}
+                    </div>
+                  </div>
+                </CSSTransition>
+              ))}
+          </TransitionGroup>
+        )}
+      </div>
     </StyledHeroSection>
   );
 };

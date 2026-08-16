@@ -8,7 +8,7 @@ import sr from '@utils/sr';
 import { usePrefersReducedMotion } from '@hooks';
 
 const StyledJobsSection = styled.section`
-  max-width: 700px;
+  max-width: 900px;
 
   .inner {
     display: flex;
@@ -71,7 +71,7 @@ const StyledTabButton = styled.button`
   display: flex;
   align-items: center;
   width: 100%;
-  min-height: var(--tab-height);
+  height: var(--tab-height);
   padding: 0 20px 2px;
   border-left: 2px solid var(--lightest-navy);
   background-color: transparent;
@@ -98,6 +98,11 @@ const StyledTabButton = styled.button`
   &:focus {
     background-color: var(--light-navy);
   }
+
+  &:active {
+    transform: translateY(1px);
+    transition: transform var(--dur-press) var(--ease-out-expo);
+  }
 `;
 
 const StyledHighlight = styled.div`
@@ -110,8 +115,11 @@ const StyledHighlight = styled.div`
   border-radius: var(--border-radius);
   background: var(--green);
   transform: translateY(calc(${({ activeTabId }) => activeTabId} * var(--tab-height)));
-  transition: transform 0.25s cubic-bezier(0.645, 0.045, 0.355, 1);
-  transition-delay: 0.1s;
+
+  /* Detent: travels with a single tight overshoot; instant under reduced motion */
+  @media (prefers-reduced-motion: no-preference) {
+    transition: transform 0.4s var(--ease-detent);
+  }
 
   @media (max-width: 600px) {
     top: auto;
@@ -140,7 +148,14 @@ const StyledTabPanels = styled.div`
 const StyledTabPanel = styled.div`
   width: 100%;
   height: auto;
-  padding: 10px 5px;
+  padding: 25px 30px;
+  background-color: var(--light-navy);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--lightest-navy);
+
+  @media (max-width: 600px) {
+    padding: 20px;
+  }
 
   ul {
     ${({ theme }) => theme.mixins.fancyList};
@@ -163,6 +178,55 @@ const StyledTabPanel = styled.div`
     font-family: var(--font-mono);
     font-size: var(--fz-xs);
   }
+
+  /* Grouped companies (multiple roles, LinkedIn-style timeline) */
+  .company-heading {
+    margin-bottom: 25px;
+  }
+
+  .role {
+    position: relative;
+
+    .role-title {
+      font-size: var(--fz-xl);
+    }
+
+    .range {
+      margin-bottom: 15px;
+    }
+  }
+
+  .role + .role {
+    margin-top: 30px;
+  }
+
+  &.grouped .role {
+    padding-left: 30px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 7px;
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 2px solid var(--green);
+      background-color: var(--light-navy);
+    }
+
+    &:not(:last-of-type):after {
+      content: '';
+      position: absolute;
+      left: 4px;
+      top: 24px;
+      bottom: -30px;
+      width: 1px;
+      background-color: var(--lightest-navy);
+    }
+  }
+
+  ${({ theme }) => theme.mixins.tabPanelCascade};
 `;
 
 const Jobs = () => {
@@ -189,6 +253,21 @@ const Jobs = () => {
   `);
 
   const jobsData = data.jobs.edges;
+
+  // Group consecutive roles at the same company into one tab (LinkedIn-style)
+  const companies = [];
+  jobsData.forEach(({ node }) => {
+    const last = companies[companies.length - 1];
+    if (last && last.company === node.frontmatter.company) {
+      last.roles.push(node);
+    } else {
+      companies.push({
+        company: node.frontmatter.company,
+        url: node.frontmatter.url,
+        roles: [node],
+      });
+    }
+  });
 
   const [activeTabId, setActiveTabId] = useState(0);
   const [tabFocus, setTabFocus] = useState(null);
@@ -249,59 +328,80 @@ const Jobs = () => {
 
       <div className="inner">
         <StyledTabList role="tablist" aria-label="Job tabs" onKeyDown={e => onKeyDown(e)}>
-          {jobsData &&
-            jobsData.map(({ node }, i) => {
-              const { company } = node.frontmatter;
-              return (
-                <StyledTabButton
-                  key={i}
-                  isActive={activeTabId === i}
-                  onClick={() => setActiveTabId(i)}
-                  ref={el => (tabs.current[i] = el)}
-                  id={`tab-${i}`}
-                  role="tab"
-                  tabIndex={activeTabId === i ? '0' : '-1'}
-                  aria-selected={activeTabId === i ? true : false}
-                  aria-controls={`panel-${i}`}>
-                  <span>{company}</span>
-                </StyledTabButton>
-              );
-            })}
+          {companies.map(({ company }, i) => (
+            <StyledTabButton
+              key={i}
+              isActive={activeTabId === i}
+              onClick={() => setActiveTabId(i)}
+              ref={el => (tabs.current[i] = el)}
+              id={`job-tab-${i}`}
+              role="tab"
+              tabIndex={activeTabId === i ? '0' : '-1'}
+              aria-selected={activeTabId === i ? true : false}
+              aria-controls={`job-panel-${i}`}>
+              <span>{company}</span>
+            </StyledTabButton>
+          ))}
           <StyledHighlight activeTabId={activeTabId} />
         </StyledTabList>
 
         <StyledTabPanels>
-          {jobsData &&
-            jobsData.map(({ node }, i) => {
-              const { frontmatter, html } = node;
-              const { title, url, company, range } = frontmatter;
+          {companies.map(({ company, url, roles }, i) => {
+            const grouped = roles.length > 1;
 
-              return (
-                <CSSTransition key={i} in={activeTabId === i} timeout={250} classNames="fade">
-                  <StyledTabPanel
-                    id={`panel-${i}`}
-                    role="tabpanel"
-                    tabIndex={activeTabId === i ? '0' : '-1'}
-                    aria-labelledby={`tab-${i}`}
-                    aria-hidden={activeTabId !== i}
-                    hidden={activeTabId !== i}>
-                    <h3>
-                      <span>{title}</span>
-                      <span className="company">
-                        &nbsp;@&nbsp;
-                        <a href={url} className="inline-link">
-                          {company}
-                        </a>
-                      </span>
-                    </h3>
+            return (
+              <CSSTransition
+                key={i}
+                in={activeTabId === i}
+                timeout={{ enter: 800, exit: 250 }}
+                classNames="fade">
+                <StyledTabPanel
+                  className={grouped ? 'grouped' : ''}
+                  id={`job-panel-${i}`}
+                  role="tabpanel"
+                  tabIndex={activeTabId === i ? '0' : '-1'}
+                  aria-labelledby={`job-tab-${i}`}
+                  aria-hidden={activeTabId !== i}
+                  hidden={activeTabId !== i}>
+                  {grouped ? (
+                    <>
+                      <h3 className="company-heading">
+                        <span className="company">
+                          <a href={url} className="inline-link">
+                            {company}
+                          </a>
+                        </span>
+                      </h3>
 
-                    <p className="range">{range}</p>
+                      {roles.map((node, ri) => (
+                        <div className="role" key={ri}>
+                          <h3 className="role-title">{node.frontmatter.title}</h3>
+                          <p className="range">{node.frontmatter.range}</p>
+                          <div dangerouslySetInnerHTML={{ __html: node.html }} />
+                        </div>
+                      ))}
+                    </>
+                  ) : (
+                    <>
+                      <h3>
+                        <span>{roles[0].frontmatter.title}</span>
+                        <span className="company">
+                          &nbsp;@&nbsp;
+                          <a href={url} className="inline-link">
+                            {company}
+                          </a>
+                        </span>
+                      </h3>
 
-                    <div dangerouslySetInnerHTML={{ __html: html }} />
-                  </StyledTabPanel>
-                </CSSTransition>
-              );
-            })}
+                      <p className="range">{roles[0].frontmatter.range}</p>
+
+                      <div dangerouslySetInnerHTML={{ __html: roles[0].html }} />
+                    </>
+                  )}
+                </StyledTabPanel>
+              </CSSTransition>
+            );
+          })}
         </StyledTabPanels>
       </div>
     </StyledJobsSection>

@@ -10,13 +10,19 @@ const button = css`
   line-height: 1;
   text-decoration: none;
   padding: 1.25rem 1.75rem;
-  transition: var(--transition);
+  transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo),
+    color 0.25s ease, background-color 0.25s ease;
 
   &:hover,
   &:focus-visible {
     outline: none;
     box-shadow: 4px 4px 0 0 var(--green);
     transform: translate(-5px, -5px);
+  }
+  &:active {
+    transform: translate(-1px, -1px);
+    box-shadow: 1px 1px 0 0 var(--green);
+    transition-duration: var(--dur-press);
   }
   &:after {
     display: none !important;
@@ -96,13 +102,19 @@ const mixins = {
     font-family: var(--font-mono);
     line-height: 1;
     text-decoration: none;
-    transition: var(--transition);
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo),
+      color 0.25s ease, background-color 0.25s ease;
 
     &:hover,
     &:focus-visible {
       outline: none;
       box-shadow: 3px 3px 0 0 var(--green);
       transform: translate(-4px, -4px);
+    }
+    &:active {
+      transform: translate(-1px, -1px);
+      box-shadow: 1px 1px 0 0 var(--green);
+      transition-duration: var(--dur-press);
     }
     &:after {
       display: none !important;
@@ -119,13 +131,19 @@ const mixins = {
     font-family: var(--font-mono);
     line-height: 1;
     text-decoration: none;
-    transition: var(--transition);
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo),
+      color 0.25s ease, background-color 0.25s ease;
 
     &:hover,
     &:focus-visible {
       outline: none;
       box-shadow: 4px 4px 0 0 var(--green);
       transform: translate(-5px, -5px);
+    }
+    &:active {
+      transform: translate(-1px, -1px);
+      box-shadow: 1px 1px 0 0 var(--green);
+      transition-duration: var(--dur-press);
     }
     &:after {
       display: none !important;
@@ -164,6 +182,45 @@ const mixins = {
     list-style: none;
     padding: 0;
     margin: 0;
+  `,
+
+  /* Tab-panel arpeggio (jobs + education): on tab switch the incoming
+     panel's title, range, and bullets land on a 60ms stagger. Resting
+     state (no transition classes) is fully visible. */
+  tabPanelCascade: css`
+    @media (prefers-reduced-motion: no-preference) {
+      &.fade-enter h3,
+      &.fade-enter .range,
+      &.fade-enter ul li {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      &.fade-enter-active h3,
+      &.fade-enter-active .range,
+      &.fade-enter-active ul li {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 350ms var(--ease-out-expo), transform 350ms var(--ease-out-expo);
+      }
+      &.fade-enter-active h3 {
+        transition-delay: 0ms;
+      }
+      &.fade-enter-active .range {
+        transition-delay: 60ms;
+      }
+      &.fade-enter-active ul li:nth-child(1) {
+        transition-delay: 120ms;
+      }
+      &.fade-enter-active ul li:nth-child(2) {
+        transition-delay: 180ms;
+      }
+      &.fade-enter-active ul li:nth-child(3) {
+        transition-delay: 240ms;
+      }
+      &.fade-enter-active ul li:nth-child(n + 4) {
+        transition-delay: 300ms;
+      }
+    }
   `,
 };
 
