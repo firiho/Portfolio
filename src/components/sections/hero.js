@@ -3,11 +3,13 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import styled from 'styled-components';
 import { navDelay } from '@utils';
 import { usePrefersReducedMotion, useScrollProgress } from '@hooks';
+import HexGlobe from '../hexglobe';
 
 const StyledHeroSection = styled.section`
   ${({ theme }) => theme.mixins.flexCenter};
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
   min-height: 100vh;
   height: 100vh;
   padding: 0;
@@ -21,7 +23,21 @@ const StyledHeroSection = styled.section`
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    position: relative;
+    z-index: 1;
     width: 100%;
+  }
+
+  /* Type hierarchy: the name owns the hero; the statement supports it */
+  h2.big-heading {
+    font-size: clamp(48px, 8.5vw, 94px);
+  }
+
+  h3.big-heading {
+    margin-top: 12px;
+    font-size: clamp(24px, 4vw, 52px);
+    line-height: 1.1;
+    max-width: 780px;
   }
 
   /* Scroll recession: as About arrives, the hero rises, shrinks a hair,
@@ -122,6 +138,7 @@ const Hero = () => {
 
   return (
     <StyledHeroSection ref={track}>
+      <HexGlobe />
       <div className="hero-inner">
         {prefersReducedMotion ? (
           <>

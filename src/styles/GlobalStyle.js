@@ -111,6 +111,10 @@ const GlobalStyle = createGlobalStyle`
     grid-template-columns: 100%;
   }
 
+  #content {
+    position: relative;
+  }
+
   main {
     margin: 0 auto;
     width: 100%;
@@ -156,6 +160,38 @@ const GlobalStyle = createGlobalStyle`
 
     @media (max-width: 480px) {
       padding: 60px 0;
+    }
+  }
+
+  /* Ghost numerals: oversized outlined section numbers, visible at rest */
+  body {
+    counter-reset: ghost-section;
+  }
+
+  main section:has(> .numbered-heading) {
+    position: relative;
+    counter-increment: ghost-section;
+
+    &:before {
+      content: counter(ghost-section, decimal-leading-zero);
+      position: absolute;
+      top: 30px;
+      right: -20px;
+      z-index: -1;
+      font-family: var(--font-mono);
+      font-size: clamp(90px, 15vw, 190px);
+      font-weight: 600;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--lightest-navy);
+      opacity: 0.6;
+      pointer-events: none;
+      user-select: none;
+
+      @media (max-width: 768px) {
+        right: 0;
+        opacity: 0.4;
+      }
     }
   }
 

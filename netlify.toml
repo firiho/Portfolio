@@ -1,0 +1,5 @@
+# File-based Netlify config — overrides the UI build settings.
+# The repo uses npm (package-lock.json); yarn.lock was removed.
+[build]
+  command = "npm run build"
+  publish = "public"

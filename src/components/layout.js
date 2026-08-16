@@ -4,6 +4,7 @@ import styled, { ThemeProvider } from 'styled-components';
 import { Head, Loader, Nav, Social, Email, Footer } from '@components';
 import { GlobalStyle, theme } from '@styles';
 import initRuleDraw from '../utils/ruleDraw';
+import ScrollThread from './scrollthread';
 
 const StyledContent = styled.div`
   display: flex;
@@ -83,6 +84,7 @@ const Layout = ({ children, location }) => {
               <Email isHome={isHome} />
 
               <div id="content">
+                <ScrollThread />
                 {children}
                 <Footer />
               </div>
